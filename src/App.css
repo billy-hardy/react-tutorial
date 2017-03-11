@@ -22,3 +22,24 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+body{
+    text-align: center;
+}
+
+.square{
+    display: inline-block;
+    height: 1.2em;
+    width: 1.2em;
+    font-size: 4em;
+    margin: 1px !important;
+    padding: 0px !important;
+    line-height: 1em;
+    border: 2px solid #000;
+    background: #fff;
+}
+
+.status{
+    font-size: 2em;
+    padding: 10px auto;
+}
