@@ -68,6 +68,13 @@ class Game extends Component {
         });
     }
 
+    jumpTo(move) {
+        let history = this.state.history.slice(0, move+1);
+        this.setState({
+            history
+        });
+    }
+
     render() {
         const current = this.state.history[this.state.history.length-1];
         const winner = calculateWinner(current.squares);
@@ -79,6 +86,15 @@ class Game extends Component {
             status = 'Next player: ' + (current.xIsNext ? 'X' : 'O');
         }
 
+        let moves = this.state.history.map((step, move) => {
+            const desc = move === 0 ? 'Game Start': 'Move #'+move;
+            return (
+                <li key={move}>
+                <a href="#" onClick={() => this.jumpTo(move)}>{desc}</a>
+                </li>
+            );
+        });
+
         return (
             <div className="game">
             <div className="game-board">
@@ -86,7 +102,7 @@ class Game extends Component {
             </div>
             <div className="game-info">
             <div>{status}</div>
-            <ol>{/* TODO */}</ol>
+            <ol>{moves}</ol>
             </div>
             </div>
         );
