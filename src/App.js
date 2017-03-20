@@ -47,6 +47,7 @@ class Game extends Component {
                     xIsNext: true,
                 }
             ],
+            current: 0
         };
     }
     
@@ -57,6 +58,9 @@ class Game extends Component {
         if(calculateWinner(squares) || squares[i] != null) {
             return;
         }
+        if(this.state.current !== history.length-1) {
+            return;
+        }
 
         squares[i] = current.xIsNext ? 'X' : 'O';
         history.push({
@@ -65,18 +69,20 @@ class Game extends Component {
         });
         this.setState({
             history,
+            current: this.state.current+1
         });
     }
 
     jumpTo(move) {
-        let history = this.state.history.slice(0, move+1);
+        let history = this.state.history.slice();
         this.setState({
-            history
+            history,
+            current: move
         });
     }
 
     render() {
-        const current = this.state.history[this.state.history.length-1];
+        const current = this.state.history[this.state.current];
         const winner = calculateWinner(current.squares);
         let status; 
         if(winner) {
